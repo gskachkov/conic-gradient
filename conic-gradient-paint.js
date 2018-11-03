@@ -240,6 +240,7 @@ class ColorStop {
     }
     colorToRGBA(color) {
         if (!Array.isArray(color) && color.indexOf("from") == -1) {
+	    console.log('color-#1', color);
             if (color.indexOf("rgba") > -1) {
                 var rgba = color.match(/rgba?\(([\d.]+),([\d.]+),([\d.]+)(?:,([\d.]+))?\)/);
                 if (rgba) {
