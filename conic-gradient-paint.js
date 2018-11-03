@@ -171,7 +171,7 @@ class ConicGradient {
             });
 
             // Draw a series of arcs, 1deg each
-	    console.log('interpolated-#1', interpolated.join(","));
+	    // console.log('interpolated-#1', interpolated.join(","));
             c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
             c.beginPath();
             c.moveTo(x, x);
@@ -240,7 +240,7 @@ class ColorStop {
     }
     colorToRGBA(color) {
         if (!Array.isArray(color) && color.indexOf("from") == -1) {
-	    console.log('color-#1', color);
+	    // console.log('color-#1', color);
             if (color.indexOf("rgba") > -1) {
                 var rgba = color.match(/rgba?\(([\d.]+),([\d.]+),([\d.]+)(?:,([\d.]+))?\)/);
                 if (rgba) {
@@ -248,7 +248,7 @@ class ColorStop {
                     rgba = rgba.map(function(a) { return +a });
                     rgba[3] = isNaN(rgba[3])? 1 : rgba[3];
                 }
-                console.log('rgba-#1', rgba);
+                // console.log('rgba-#1', rgba);
                 return rgba || [0,0,0,0];
             } else if (color.indexOf("hsla") > -1) {
                var hsla = color.match(/hsla?\(([\d.]+),([\d.]+)%,([\d.]+)%,([\d.]+)/);
@@ -258,7 +258,7 @@ class ColorStop {
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
                 }
 	        const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
-		console.log('hsla-#1', rgba);
+		// console.log('hsla-#1', rgba);
 	        return rgba;
             }
         }
