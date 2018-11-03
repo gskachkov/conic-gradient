@@ -171,6 +171,8 @@ class ConicGradient {
 
             t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);
 
+            console.log('interpolate-#1', sameColor, stop.color, diff); 
+		
             var interpolated = sameColor? stop.color : diff.map(function(d,i){
 		console.log('color', prevStop.color[i]);    
                 var ret = d * t + prevStop.color[i];
