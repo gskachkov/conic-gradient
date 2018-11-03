@@ -273,7 +273,7 @@ class ColorStop {
 	      
                const rgba = hslaToRgba(hsla[0], hsla[1], hsla[2], hsla[3]);
 	       console.log('rgba', rgba); 
-	       retrun rgba;
+	       return rgba;
             }
         }
         console.log('rgba-color', color);
