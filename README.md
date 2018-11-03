@@ -1,3 +1,3 @@
 # Conic Gradient Polyfill
 
-Please visit http://leaverou.github.io/conic-gradient/ for usage instructions and demos.
+Please visit https://gskachkov.github.io/conic-gradient/. for usage instructions and demos.
