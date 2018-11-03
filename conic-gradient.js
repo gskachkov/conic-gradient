@@ -34,7 +34,9 @@ var _ = self.ConicGradient = function(o) {
 	this.stops = (stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
 
 	this.from = 0;
-
+        
+	console.time('conic-gradient');
+	
 	for (var i=0; i<this.stops.length; i++) {
 		if (this.stops[i]) {
 			var stop = this.stops[i] = new _.ColorStop(this, this.stops[i]);
@@ -107,7 +109,9 @@ var _ = self.ConicGradient = function(o) {
 			}
 		}
 	}
-
+	
+	console.timeEnd('conic-gradient');
+	
 	this.paint();
 };
 
@@ -339,11 +343,11 @@ if (self.StyleFix) {
 		}
 
 		// First see if we need need a polyfill for dual-position color stops.
-		if (!supportedBackgroundImage("linear-gradient(white 0% 50%, black 50% 100%)"))
-			installGradientFix("(?:linear|radial|conic)-gradient", dualPositionFix);
+		// if (!supportedBackgroundImage("linear-gradient(white 0% 50%, black 50% 100%)"))
+	        installGradientFix("(?:linear|radial|conic)-gradient", dualPositionFix);
 
 		// Then check whether we need to polyfill conic-gradient.
-		if (!supportedBackgroundImage("conic-gradient(white, black)"))
-			installGradientFix("conic-gradient", conicGradientFix);
+		// if (!supportedBackgroundImage("conic-gradient(white, black)"))
+		installGradientFix("conic-gradient", conicGradientFix);
 	})();
 }
