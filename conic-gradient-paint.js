@@ -251,15 +251,14 @@ class ColorStop {
                 return rgba || [0,0,0,0];
             } else if (color.indexOf("hsla") > -1) {
                var hsla = color.match(/hsla?\(([\d.]+),([\d.]+)%,([\d.]+)%,([\d.]+)/);
-		console.log('rgba-#1', rgba);
                if (hsla) {
                     hsla.shift();
                     hsla = hsla.map(function(a) { return +a });
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
                 }
-	            const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
-		    console.log('hsla-#1', rgba);
-	            return rgba;
+	        const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
+		console.log('hsla-#1', rgba);
+	        return rgba;
             }
         }
         return color;
