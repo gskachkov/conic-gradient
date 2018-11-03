@@ -126,7 +126,7 @@ class ConicGradient {
         
         console.timeEnd('conic-gradient');
         
-        this.draw(ctx, r, size, stops);
+        this.draw(ctx, this.r(size), size, stops);
     }
 
     draw (ctx, r, size, stops) {
@@ -203,6 +203,9 @@ class ConicGradient {
 
             i += θ;
         }
+    }
+    r(size) {
+	return Math.sqrt(2) * size / 2;
     }
 };
 
