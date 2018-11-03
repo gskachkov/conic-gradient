@@ -19,7 +19,6 @@ var _ = self.ConicGradient = function(o) {
 	_.all.push(this);
 
 	o = o || {};
-	console.log(o);
 
 	this.canvas = document.createElement("canvas");
 	this.context = this.canvas.getContext("2d");
@@ -27,8 +26,6 @@ var _ = self.ConicGradient = function(o) {
 	this.repeating = !!o.repeating;
 
 	this.size = o.size || Math.max(innerWidth, innerHeight);
-	console.log(this.size);
-
 	this.canvas.width = this.canvas.height = this.size;
 
 	var stops = o.stops;
@@ -158,7 +155,6 @@ _.prototype = {
 
 		var radius = this.r;
 		var x = this.size / 2;
-		console.log(radius, x, this.size);
 
 		var stopIndex = 0; // The index of the current color
 		var stop = this.stops[stopIndex], prevStop;
@@ -172,7 +168,6 @@ _.prototype = {
 		c.translate(-this.size/2, -this.size/2);
 
 		for (var i = 0; i < 360;) {
-		     console.log('step-#0', i);
 			if (i/360 + ε >= stop.pos) {
 				// Switch color stop
 				do {
@@ -203,7 +198,6 @@ _.prototype = {
 			});
 
 			// Draw a series of arcs, 1deg each
-			console.log('fillStyle-#0', interpolated.join(","));
 			c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
 			c.beginPath();
 			c.moveTo(x, x);
@@ -222,7 +216,6 @@ _.prototype = {
 			// only non-alpha colors are cared now
 			var endArg = beginArg + θ*deg;
 			endArg = Math.min(360*deg, endArg + .02);
-			console.log('arc-#0', x, x, radius, beginArg, endArg);
 			c.arc(x, x, radius, beginArg, endArg);
 
 			c.closePath();
@@ -283,11 +276,9 @@ _.ColorStop.prototype = {
 
 _.ColorStop.colorToRGBA = function(color) {
 	if (!Array.isArray(color) && color.indexOf("from") == -1) {
-		// console.log('color', color);
 		dummy.style.color = color;
 
 		var rgba = getComputedStyle(dummy).color.match(/rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/);
-		// console.log('rgba-color', rgba);
 		if (rgba) {
 			rgba.shift();
 			rgba = rgba.map(function(a) { return +a });
