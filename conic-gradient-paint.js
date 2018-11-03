@@ -110,13 +110,13 @@ class ConicGradient {
     
         if (repeating) {
             // Repeat color stops until >= 1
-            var stops = stops.slice();
-            var lastStop = stops[stops.length-1];
-            var difference = lastStop.pos - stops[0].pos;
+            var rStops = stops.slice();
+            var lastStop = rStops[stops.length-1];
+            var difference = lastStop.pos - rStops[0].pos;
     
             for (var i=0; stops[stops.length-1].pos < 1 && i<10000; i++) {
-                for (var j=0; j<stops.length; j++) {
-                    var s = stops[j].clone();
+                for (var j=0; j<rStops.length; j++) {
+                    var s = rStops[j].clone();
                     s.pos += (i+1)*difference;
     
                     stops.push(s);
