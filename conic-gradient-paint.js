@@ -216,6 +216,7 @@ class ConicGradient {
 
 class ColorStop {
     constructor(gradient, stop) {
+	console.log('Create stop', gradient, stop);
         this.gradient = gradient;
 
         if (stop) {
@@ -247,8 +248,10 @@ class ColorStop {
                 this.next = new ColorStop(gradient, parts[1] + " " + parts[4] + parts[5]);
             }
         }
+	console.log('Create stop', this);
     }
     colorToRGBA(color) {
+	console.log(color);
         if (!Array.isArray(color) && color.indexOf("from") == -1) {
             if (color.indexOf("rgba") > -1) {
                 var rgba = color.match(/rgba?\(([\d.]+),([\d.]+),([\d.]+)(?:,([\d.]+))?\)/);
