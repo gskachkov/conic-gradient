@@ -170,6 +170,7 @@ _.prototype = {
 		c.translate(-this.size/2, -this.size/2);
 
 		for (var i = 0; i < 360;) {
+		     console.log('step-#0', i);
 			if (i/360 + ε >= stop.pos) {
 				// Switch color stop
 				do {
@@ -200,7 +201,7 @@ _.prototype = {
 			});
 
 			// Draw a series of arcs, 1deg each
-			console.log('interpolate#1', interpolated.join(","));
+			console.log('interpolate-#0', interpolated.join(","));
 			c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
 			c.beginPath();
 			c.moveTo(x, x);
