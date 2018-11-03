@@ -35,18 +35,14 @@ class ConicGradient {
             repeating: true,
             stops: "hsla(0,0%,100%,.2) 0, hsla(0,0%,100%,.2) 15deg, hsla(0,0%,100%,0) 0, hsla(0,0%,100%,0) 30deg"
         };
-    
-        // o = o || {};
         var repeating = !!o.repeating;
 
         const size = o.size || Math.max(geom.width, geom.height);
-	console.log(o.size, geom.width, geom.height);
-	//const size = 948;
         let stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
     
         let from = 0;
             
-        console.time('conic-gradient', stops);
+        console.time('conic-gradient');
         
         for (var i=0; i< stops.length; i++) {
             if (stops[i]) {
@@ -62,7 +58,7 @@ class ConicGradient {
                 i--;
             }
         }
-        console.time('conic-gradient-first', stops[0]);
+
         if (stops[0].color.indexOf('from') == 0) {
             from = stops[0].pos*360;
             stops.shift();
@@ -130,7 +126,6 @@ class ConicGradient {
 
         var radius = r;
         var x = size / 2;
-	console.log(r, x, size);
 
         var stopIndex = 0; // The index of the current color
         var stop = stops[stopIndex], prevStop;
@@ -144,7 +139,6 @@ class ConicGradient {
         c.translate(-size/2, -size/2);
 
         for (var i = 0; i < 360;) {
-	    console.log('step:', i);
             if (i/360 + ε >= stop.pos) {
                 // Switch color stop
                 do {
@@ -174,7 +168,6 @@ class ConicGradient {
             });
 
             // Draw a series of arcs, 1deg each
-	    console.log('fillStyle-#1', interpolated.join(","));
             c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
             c.beginPath();
             c.moveTo(x, x);
@@ -193,7 +186,6 @@ class ConicGradient {
             // only non-alpha colors are cared now
             var endArg = beginArg + θ*deg;
             endArg = Math.min(360*deg, endArg + .02);
-            console.log('arc-#1', x, x, radius, beginArg, endArg);
             c.arc(x, x, radius, beginArg, endArg);
 
             c.closePath();
@@ -260,9 +252,7 @@ class ColorStop {
                     hsla = hsla.map(function(a) { return +a });
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
                 }
-	        const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
-		// console.log('hsla-#1', rgba);
-	        return rgba;
+	        return hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
             }
         }
         return color;
