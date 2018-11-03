@@ -19,6 +19,7 @@ var _ = self.ConicGradient = function(o) {
 	_.all.push(this);
 
 	o = o || {};
+	console.log(o);
 
 	this.canvas = document.createElement("canvas");
 	this.context = this.canvas.getContext("2d");
