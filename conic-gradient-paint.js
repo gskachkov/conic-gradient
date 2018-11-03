@@ -259,7 +259,7 @@ class ColorStop {
                     hsla = hsla.map(function(a) { return +a });
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
                 }
-               return hslToRgb(hsla[0], hsla[1], hsla[2], hsla[3]);
+               return hslaToRgba(hsla[0], hsla[1], hsla[2], hsla[3]);
             }
         }
     
