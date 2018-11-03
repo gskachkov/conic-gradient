@@ -37,13 +37,10 @@ class ConicGradient {
         };
     
         // o = o || {};
-	console.log(o);
-    
         var repeating = !!o.repeating;
-        console.log(geom);
+
         const size = o.size || Math.max(geom.width, geom.height);
     
-	console.log(ctx, size);
         // ctx.width = ctx.canvas.height = ctx.size;
     
         let stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
@@ -169,15 +166,17 @@ class ConicGradient {
                 });
             }
 
-            t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);		
-            var interpolated = sameColor? stop.color : diff.map(function(d,i){
+            t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);
+
+            console.log('interpolate-#1', sameColor, stop.color, diff); 
+		
+            var interpolated = sameColor? stop.color : diff.map(function(d,i){  
                 var ret = d * t + prevStop.color[i];
 
                 return i < 3? ret & 255 : ret;
             });
 
             // Draw a series of arcs, 1deg each
-	    console.log('interpolate', interpolated.join(","));
             c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
             c.beginPath();
             c.moveTo(x, x);
@@ -196,6 +195,7 @@ class ConicGradient {
             // only non-alpha colors are cared now
             var endArg = beginArg + θ*deg;
             endArg = Math.min(360*deg, endArg + .02);
+
             c.arc(x, x, radius, beginArg, endArg);
 
             c.closePath();
@@ -211,7 +211,6 @@ class ConicGradient {
 
 class ColorStop {
     constructor(gradient, stop) {
-	console.log('Create stop', gradient, stop);
         this.gradient = gradient;
 
         if (stop) {
@@ -243,10 +242,8 @@ class ColorStop {
                 this.next = new ColorStop(gradient, parts[1] + " " + parts[4] + parts[5]);
             }
         }
-	console.log('Create stop', this);
     }
     colorToRGBA(color) {
-	console.log(color);
         if (!Array.isArray(color) && color.indexOf("from") == -1) {
             if (color.indexOf("rgba") > -1) {
                 var rgba = color.match(/rgba?\(([\d.]+),([\d.]+),([\d.]+)(?:,([\d.]+))?\)/);
@@ -256,7 +253,7 @@ class ColorStop {
                     rgba = rgba.map(function(a) { return +a });
                     rgba[3] = isNaN(rgba[3])? 1 : rgba[3];
                 }
-        	console.log('rgba-', rgba);
+        
                 return rgba || [0,0,0,0];
             } else if (color.indexOf("hsla") > -1) {
                var hsla = color.match(/hsla?\(([\d.]+),([\d.]+)%,([\d.]+)%,([\d.]+)/);
@@ -264,13 +261,11 @@ class ColorStop {
                     hsla.shift();
                     hsla = hsla.map(function(a) { return +a });
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
-	       }
-               const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
-	       console.log('hsla', rgba); 
-	       return rgba;
+                }
+	            const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
+	            return rgba;
             }
         }
-        console.log('rgba-color', color);
         return color;
     }
     toString() {
