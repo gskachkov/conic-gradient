@@ -27,6 +27,7 @@ var _ = self.ConicGradient = function(o) {
 	this.repeating = !!o.repeating;
 
 	this.size = o.size || Math.max(innerWidth, innerHeight);
+	console.log(this.size);
 
 	this.canvas.width = this.canvas.height = this.size;
 
