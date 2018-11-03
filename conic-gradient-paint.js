@@ -39,7 +39,8 @@ class ConicGradient {
         // o = o || {};
         var repeating = !!o.repeating;
 
-        const size = o.size || Math.max(geom.width, geom.height); 
+        const size = o.size || Math.max(geom.width, geom.height);
+	console.log(size);
         let stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
     
         let from = 0;
