@@ -272,11 +272,11 @@ class ColorStop {
                 }
 	      
                const rgba = hslaToRgba(hsla[0], hsla[1], hsla[2], hsla[3]);
-	       console.log(rgba); 
+	       console.log('rgba', rgba); 
 	       retrun rgba;
             }
         }
-        console.log(color);
+        console.log('rgba-color', color);
         return color;
     }
     toString() {
