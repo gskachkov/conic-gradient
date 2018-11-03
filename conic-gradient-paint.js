@@ -147,6 +147,7 @@ class ConicGradient {
         c.translate(-size/2, -size/2);
 
         for (var i = 0; i < 360;) {
+	    console.log('step:', i);
             if (i/360 + ε >= stop.pos) {
                 // Switch color stop
                 do {
@@ -177,6 +178,7 @@ class ConicGradient {
             });
 
             // Draw a series of arcs, 1deg each
+	    console.log('interpolate', interpolated.join(","));
             c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
             c.beginPath();
             c.moveTo(x, x);
@@ -195,7 +197,7 @@ class ConicGradient {
             // only non-alpha colors are cared now
             var endArg = beginArg + θ*deg;
             endArg = Math.min(360*deg, endArg + .02);
-
+	    console.log('path', x, x, radius, beginArg, endArg);
             c.arc(x, x, radius, beginArg, endArg);
 
             c.closePath();
