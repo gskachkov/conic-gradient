@@ -279,10 +279,11 @@ _.ColorStop.prototype = {
 
 _.ColorStop.colorToRGBA = function(color) {
 	if (!Array.isArray(color) && color.indexOf("from") == -1) {
+		console.log('color', color);
 		dummy.style.color = color;
 
 		var rgba = getComputedStyle(dummy).color.match(/rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/);
-
+		console.log('rgba-color', rgba);
 		if (rgba) {
 			rgba.shift();
 			rgba = rgba.map(function(a) { return +a });
