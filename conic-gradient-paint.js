@@ -50,7 +50,7 @@ class ConicGradient {
     
         let from = 0;
             
-        console.time('conic-gradient');
+        console.time('conic-gradient', stops);
         
         for (var i=0; i< stops.length; i++) {
             if (stops[i]) {
@@ -66,7 +66,7 @@ class ConicGradient {
                 i--;
             }
         }
-    
+        console.time('conic-gradient-first', stops[0]);
         if (stops[0].color.indexOf('from') == 0) {
             from = stops[0].pos*360;
             stops.shift();
