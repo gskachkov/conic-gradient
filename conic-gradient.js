@@ -200,6 +200,7 @@ _.prototype = {
 			});
 
 			// Draw a series of arcs, 1deg each
+			console.log('interpolate#1', interpolated.join(","));
 			c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
 			c.beginPath();
 			c.moveTo(x, x);
@@ -218,7 +219,7 @@ _.prototype = {
 			// only non-alpha colors are cared now
 			var endArg = beginArg + θ*deg;
 			endArg = Math.min(360*deg, endArg + .02);
-
+			console.log('path#1', x, x, radius, beginArg, endArg);
 			c.arc(x, x, radius, beginArg, endArg);
 
 			c.closePath();
