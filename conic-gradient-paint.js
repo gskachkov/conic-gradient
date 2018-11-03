@@ -37,7 +37,7 @@ class ConicGradient {
         };
     
         // o = o || {};
-
+	console.log(o);
     
         var repeating = !!o.repeating;
         console.log(geom);
@@ -169,12 +169,8 @@ class ConicGradient {
                 });
             }
 
-            t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);
-
-            console.log('interpolate-#1', sameColor, stop.color, diff); 
-		
+            t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);		
             var interpolated = sameColor? stop.color : diff.map(function(d,i){
-		console.log('color', prevStop.color[i]);    
                 var ret = d * t + prevStop.color[i];
 
                 return i < 3? ret & 255 : ret;
@@ -200,7 +196,6 @@ class ConicGradient {
             // only non-alpha colors are cared now
             var endArg = beginArg + θ*deg;
             endArg = Math.min(360*deg, endArg + .02);
-	    console.log('path', x, x, radius, beginArg, endArg);
             c.arc(x, x, radius, beginArg, endArg);
 
             c.closePath();
@@ -261,7 +256,7 @@ class ColorStop {
                     rgba = rgba.map(function(a) { return +a });
                     rgba[3] = isNaN(rgba[3])? 1 : rgba[3];
                 }
-        
+        	console.log('rgba-', rgba);
                 return rgba || [0,0,0,0];
             } else if (color.indexOf("hsla") > -1) {
                var hsla = color.match(/hsla?\(([\d.]+),([\d.]+)%,([\d.]+)%,([\d.]+)/);
@@ -269,10 +264,9 @@ class ColorStop {
                     hsla.shift();
                     hsla = hsla.map(function(a) { return +a });
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
-                }
-	       console.log('hsla', hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]); 
+	       }
                const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
-	       console.log('rgba', rgba); 
+	       console.log('hsla', rgba); 
 	       return rgba;
             }
         }
