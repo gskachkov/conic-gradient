@@ -270,10 +270,13 @@ class ColorStop {
                     hsla = hsla.map(function(a) { return +a });
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
                 }
-               return hslaToRgba(hsla[0], hsla[1], hsla[2], hsla[3]);
+	      
+               const rgba = hslaToRgba(hsla[0], hsla[1], hsla[2], hsla[3]);
+	       console.log(rgba); 
+	       retrun rgba;
             }
         }
-    
+        console.log(color);
         return color;
     }
     toString() {
