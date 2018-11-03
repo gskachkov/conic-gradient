@@ -271,7 +271,7 @@ class ColorStop {
                     hsla[3] = isNaN(hsla[3])? 1 : hsla[3];
                 }
 	       console.log('hsla', hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]); 
-               const rgba = hslaToRgba(hsla[0], hsla[1], hsla[2], hsla[3]);
+               const rgba = hslaToRgba(hsla[0], hsla[1]/100, hsla[2]/100, hsla[3]);
 	       console.log('rgba', rgba); 
 	       return rgba;
             }
