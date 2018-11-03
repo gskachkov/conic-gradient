@@ -14,11 +14,15 @@ var deg = π/180;
 var dummy = document.createElement("div");
 document.head.appendChild(dummy);
 
-var _ = self.ConicGradient = function(o) {
+var _ = self.ConicGradient = function(input_params) {
 	var me = this;
 	_.all.push(this);
+	const o = {
+		repeating: true,
+		stops: "hsla(0,0%,100%,.2) 0, hsla(0,0%,100%,.2) 15deg, hsla(0,0%,100%,0) 0, hsla(0,0%,100%,0) 30deg"
+	};
 
-	o = o || {};
+	// o = o || {};
 
 	this.canvas = document.createElement("canvas");
 	this.context = this.canvas.getContext("2d");
@@ -295,59 +299,3 @@ _.ColorStop.colorToRGBA = function(color) {
 };
 
 })();
-
-if (self.StyleFix) {
-	(function(){
-		function supportedBackgroundImage(checkStyle) {
-			var dummy = document.createElement("p");
-			dummy.style.backgroundImage = checkStyle;
-			dummy.style.backgroundImage = PrefixFree.prefix + checkStyle;
-			return !!dummy.style.backgroundImage;
-		}
-
-		function installGradientFix(gradientExp, fix) {
-			var match = new RegExp("(?:repeating-)?" + gradientExp + "\\(\\s*((?:\\([^()]+\\)|[^;()}])+?)\\)", "g");
-			StyleFix.register(function(css, raw) {
-				return (css.indexOf("-gradient") > -1) ? css.replace(match, fix) : css;
-			});
-		}
-
-		// Emulates conic-gradient in the absence of a native implementation.
-		function conicGradientFix(gradient, stops) {
-			return new ConicGradient({
-				stops: stops,
-				repeating: gradient.indexOf("repeating-") > -1
-			});
-		}
-
-		// Converts dual-position color stops (CSS Images Module Level 4) if not supported.
-		function dualPositionFix(gradient, stops) {
-			var adjustedStops = "";
-			(stops || "").split(/\s*,(?![^(]*\))\s*/).forEach(function(stop, i) {
-				if (!stop) return;
-
-				adjustedStops += (adjustedStops != "") ? ", " : "";
-
-				var parts = stop.split(/ /);
-				if (parts.length === 3) {
-					// When the color stop has 3 components, assume it uses dual-positioning and convert:
-					//     "color pos0 pos1" -> "color pos0, color pos1"
-					adjustedStops += parts[0] + " " + parts[1] + ", " + parts[0] + " " + parts[2];
-				}
-				else {
-					adjustedStops += stop;
-				}
-			});
-
-			return gradient.replace(stops, adjustedStops);
-		}
-
-		// First see if we need need a polyfill for dual-position color stops.
-		// if (!supportedBackgroundImage("linear-gradient(white 0% 50%, black 50% 100%)"))
-	        installGradientFix("(?:linear|radial|conic)-gradient", dualPositionFix);
-
-		// Then check whether we need to polyfill conic-gradient.
-		// if (!supportedBackgroundImage("conic-gradient(white, black)"))
-		installGradientFix("conic-gradient", conicGradientFix);
-	})();
-}
