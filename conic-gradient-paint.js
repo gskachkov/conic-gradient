@@ -243,7 +243,6 @@ class ColorStop {
                     rgba = rgba.map(function(a) { return +a });
                     rgba[3] = isNaN(rgba[3])? 1 : rgba[3];
                 }
-                // console.log('rgba-#1', rgba);
                 return rgba || [0,0,0,0];
             } else if (color.indexOf("hsla") > -1) {
                var hsla = color.match(/hsla?\(([\d.]+),([\d.]+)%,([\d.]+)%,([\d.]+)/);
