@@ -40,8 +40,8 @@ class ConicGradient {
 
     
         var repeating = !!o.repeating;
-    
-        const size = o.size || Math.max(innerWidth, innerHeight);
+        console.log(geom);
+        const size = o.size || Math.max(geom.width, geom.height);
     
         ctx.width = ctx.canvas.height = ctx.size;
     
