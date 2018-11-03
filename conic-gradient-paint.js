@@ -48,7 +48,7 @@ class ConicGradient {
     
         let stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
     
-        const from = 0;
+        let from = 0;
             
         console.time('conic-gradient');
         
@@ -126,10 +126,10 @@ class ConicGradient {
         
         console.timeEnd('conic-gradient');
         
-        this.draw(ctx, this.r(size), size, stops);
+        this.draw(ctx, this.r(size), size, stops, from);
     }
 
-    draw (ctx, r, size, stops) {
+    draw (ctx, r, size, stops, from) {
         var c = ctx;
 
         var radius = r;
