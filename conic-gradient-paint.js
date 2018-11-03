@@ -39,10 +39,7 @@ class ConicGradient {
         // o = o || {};
         var repeating = !!o.repeating;
 
-        const size = o.size || Math.max(geom.width, geom.height);
-    
-        // ctx.width = ctx.canvas.height = ctx.size;
-    
+        const size = o.size || Math.max(geom.width, geom.height); 
         let stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
     
         let from = 0;
@@ -166,10 +163,7 @@ class ConicGradient {
                 });
             }
 
-            t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);
-
-            console.log('interpolate-#1', sameColor, stop.color, diff); 
-		
+            t = (i/360 - prevStop.pos) / (stop.pos - prevStop.pos);		
             var interpolated = sameColor? stop.color : diff.map(function(d,i){  
                 var ret = d * t + prevStop.color[i];
 
@@ -177,6 +171,7 @@ class ConicGradient {
             });
 
             // Draw a series of arcs, 1deg each
+	    console.log('interpolated-#1', interpolated.join(","));
             c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
             c.beginPath();
             c.moveTo(x, x);
