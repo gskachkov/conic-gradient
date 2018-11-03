@@ -43,8 +43,8 @@ class ConicGradient {
         console.log(geom);
         const size = o.size || Math.max(geom.width, geom.height);
     
-        ctx.width = ctx.canvas.height = ctx.size;
-    
+	console.log(ctx, size);
+        // ctx.width = ctx.canvas.height = ctx.size;
     
         this.stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
     
@@ -75,9 +75,8 @@ class ConicGradient {
     
         // Add dummy first stop or set first stop’s position to 0 if it doesn’t have one
         if (stops[0].pos === undefined) {
-                stops[0].pos = 0;
-            }
-        else if (stops[0].pos > 0) {
+            stops[0].pos = 0;
+        } else if (stops[0].pos > 0) {
             var first = stops[0].clone();
             first.pos = 0;
             stops.unshift(first);
@@ -88,12 +87,12 @@ class ConicGradient {
             stops[stops.length - 1].pos = 1;
         }
         else if (!repeating && stops[stops.length - 1].pos < 1) {
-            var last = this.stops[this.stops.length - 1].clone();
+            var last = stops[this.stops.length - 1].clone();
             last.pos = 1;
             this.stops.push(last);
         }
     
-        this.stops.forEach(function(stop, i){
+        stops.forEach(function(stop, i) {
             if (stop.pos === undefined) {
                 // Evenly space color stops with no position
                 for (var j=i+1; this[j]; j++) {
@@ -267,8 +266,15 @@ class ColorStop {
         return color;
     }
     toString() {
-		return "rgba(" + this.color.join(", ") + ") " + this.pos * 100 + "%";
-	}
+	return "rgba(" + this.color.join(", ") + ") " + this.pos * 100 + "%";
+    }
+    clone() {
+	var ret = new ColorStop(this.gradient);
+	ret.color = this.color;
+	ret.pos = this.pos;
+
+	return ret;
+    }
 }
 
 registerPaint('conic-gradient', ConicGradient);
