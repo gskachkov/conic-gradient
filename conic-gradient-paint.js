@@ -240,7 +240,7 @@ class ColorStop {
             }
         }
     }
-    static colorToRGBA(color) {
+    colorToRGBA(color) {
         if (!Array.isArray(color) && color.indexOf("from") == -1) {
             if (color.indexOf("rgba") > -1) {
                 var rgba = color.match(/rgba?\(([\d.]+),([\d.]+),([\d.]+)(?:,([\d.]+))?\)/);
