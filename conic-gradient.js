@@ -157,7 +157,7 @@ _.prototype = {
 
 		var radius = this.r;
 		var x = this.size / 2;
-		console.log(radius, x, size);
+		console.log(radius, x, this.size);
 
 		var stopIndex = 0; // The index of the current color
 		var stop = this.stops[stopIndex], prevStop;
