@@ -41,7 +41,9 @@ textarea {
 	font: inherit;
 	font-family: Consolas, Monaco, monospace;
 }
-
+.gradient-bg {
+	background-color: #0ac;
+}
 #examples {}
 
 	#examples article {
