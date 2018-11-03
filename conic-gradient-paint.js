@@ -128,6 +128,7 @@ class ConicGradient {
 
         var radius = r;
         var x = size / 2;
+	console.log(r, x, size);
 
         var stopIndex = 0; // The index of the current color
         var stop = stops[stopIndex], prevStop;
