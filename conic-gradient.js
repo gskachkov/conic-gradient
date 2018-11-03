@@ -201,7 +201,7 @@ _.prototype = {
 			});
 
 			// Draw a series of arcs, 1deg each
-			console.log('interpolate-#0', interpolated.join(","));
+			// console.log('interpolate-#0', interpolated.join(","));
 			c.fillStyle = 'rgba(' + interpolated.join(",") + ')';
 			c.beginPath();
 			c.moveTo(x, x);
@@ -220,7 +220,7 @@ _.prototype = {
 			// only non-alpha colors are cared now
 			var endArg = beginArg + θ*deg;
 			endArg = Math.min(360*deg, endArg + .02);
-			console.log('path#1', x, x, radius, beginArg, endArg);
+			// console.log('path#1', x, x, radius, beginArg, endArg);
 			c.arc(x, x, radius, beginArg, endArg);
 
 			c.closePath();
@@ -281,11 +281,11 @@ _.ColorStop.prototype = {
 
 _.ColorStop.colorToRGBA = function(color) {
 	if (!Array.isArray(color) && color.indexOf("from") == -1) {
-		console.log('color', color);
+		// console.log('color', color);
 		dummy.style.color = color;
 
 		var rgba = getComputedStyle(dummy).color.match(/rgba?\(([\d.]+), ([\d.]+), ([\d.]+)(?:, ([\d.]+))?\)/);
-		console.log('rgba-color', rgba);
+		// console.log('rgba-color', rgba);
 		if (rgba) {
 			rgba.shift();
 			rgba = rgba.map(function(a) { return +a });
