@@ -46,14 +46,14 @@ class ConicGradient {
 	console.log(ctx, size);
         // ctx.width = ctx.canvas.height = ctx.size;
     
-        this.stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
+        let stops = (o.stops || "").split(/\s*,(?![^(]*\))\s*/); // commas that are not followed by a ) without a ( first
     
         const from = 0;
             
         console.time('conic-gradient');
         
         for (var i=0; i< stops.length; i++) {
-            if (this.stops[i]) {
+            if (stops[i]) {
                 var stop = stops[i] = new ColorStop(this, stops[i]);
     
                 if (stop.next) {
