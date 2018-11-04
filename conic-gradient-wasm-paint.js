@@ -268,4 +268,4 @@ class ColorStop {
     }
 }
 
-registerPaint('conic-gradient', ConicGradient);
+registerPaint('conic-gradient-wasm', ConicGradient);
