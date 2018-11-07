@@ -117,7 +117,7 @@ class ConicGradient {
         }
         
         console.timeEnd('conic-gradient');
-        
+        console.log(stops);
         this.draw(ctx, this.r(size), size, stops, from);
     }
 
