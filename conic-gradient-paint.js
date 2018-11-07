@@ -32,7 +32,7 @@ class ConicGradient {
     paint(ctx, geom, properties) { 
 
         const o = {
-            repeating: false,
+            repeating: true,
             stops: "hsla(0,0%,100%,.2) 0, hsla(0,0%,100%,.2) 15deg, hsla(0,0%,100%,0) 0, hsla(0,0%,100%,0) 30deg"
         };
         var repeating = !!o.repeating;
